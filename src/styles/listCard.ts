@@ -30,9 +30,26 @@ export const CardCategory = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  text-align: center;
   margin-top: 4px;
   background-color: #ffffff;
   padding: 4px 8px;
   border-radius: 8px;
+  border: 1px solid #e0e0e0;
   font-size: 16px;
+`;
+export const Select = styled.select`
+  width: 200px;
+  height: 35px;
+  background: white;
+  color: gray;
+  padding: 0 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 16px 0;
+  option {
+    color: black;
+    background: white;
+  }
 `;

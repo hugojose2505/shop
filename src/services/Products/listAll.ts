@@ -1,16 +1,19 @@
+import axios from "axios";
 import { listProducts } from "@/routes/product/routes";
 import { ListProductsResponse } from "@/types/product";
-import axios from "axios";
 
 export async function listAllProducts(
-  page: number = 1
+  page: number = 1,
+  categoryId?: string
 ): Promise<ListProductsResponse> {
-  const response = await axios.get<ListProductsResponse>(
-    `${listProducts}`,
-    {
-      params: { page },
-    }
-  );
+  const params: Record<string, string | number> = { page };
+  if (categoryId) {
+    params.category = categoryId;
+  }
+
+  const response = await axios.get<ListProductsResponse>(listProducts, {
+    params,
+  });
 
   if (response.status !== 200) {
     throw new Error("Failed to fetch products");
