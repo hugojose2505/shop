@@ -1,4 +1,4 @@
-// src/services/Products/listAll.ts
+import { listProducts } from "@/routes/product/routes";
 import { ListProductsResponse } from "@/types/product";
 import axios from "axios";
 
@@ -6,7 +6,7 @@ export async function listAllProducts(
   page: number = 1
 ): Promise<ListProductsResponse> {
   const response = await axios.get<ListProductsResponse>(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/products`,
+    `${listProducts}`,
     {
       params: { page },
     }

@@ -4,10 +4,14 @@ import { ProductCard } from "@/components/Card";
 import { listAllProducts } from "@/services/Products/listAll";
 import { Product, Pagination as PagType } from "@/types/product";
 import { Pagination } from "@/components/Pagination";
-import { Grid, PageWrapper } from "@/styles/listCard";
+import { CardCategory, Grid, GridCategory, PageWrapper } from "@/styles/listCard";
+import { listAllCategories } from "@/services/Categories/listAllCategories";
+import { Category } from "@/types/categories";
 
 export default function HomePage() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+
   const [pagination, setPagination] = useState<PagType>({
     currentPage: 1,
     totalPages: 1,
@@ -30,6 +34,19 @@ export default function HomePage() {
     fetchProducts(pagination.currentPage);
   }, [pagination.currentPage]);
 
+  const fetchCategories = async () => {
+    try {
+      const { categories } = await listAllCategories();
+      setCategories(categories);
+    } catch (err: any) {
+      console.error(err.message || "Erro ao carregar categorias");
+    }
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
   return (
     <PageWrapper>
       <h1>Todos os Produtos</h1>
@@ -50,7 +67,14 @@ export default function HomePage() {
         }
       />
       <h1>Principais categorias</h1>
-
+      <GridCategory>
+        {categories.map((cat) => (
+          <CardCategory key={cat.id}>
+            <h2>{cat.name}</h2>
+            <p>{cat.description}</p>
+          </CardCategory>
+        ))}
+      </GridCategory>
     </PageWrapper>
   );
 }
