@@ -1,9 +1,13 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { ProductCard } from "@/components/Card";
 import { listAllProducts } from "@/services/Products/listAll";
-import { Product, Pagination as PagType } from "@/types/product";
+import type { Product, Pagination as PagType } from "@/types/product";
 import { Pagination } from "@/components/Pagination";
+import { listAllCategories } from "@/services/Categories/listAllCategories";
+import type { Category } from "@/types/categories";
+import { renameRoute } from "@/utils/renameRoute";
 import {
   CardCategory,
   Grid,
@@ -11,11 +15,9 @@ import {
   PageWrapper,
   Select,
 } from "@/styles/listCard";
-import { listAllCategories } from "@/services/Categories/listAllCategories";
-import { Category } from "@/types/categories";
-import styled from "styled-components";
 
 export default function HomePage() {
+  const router = useRouter();
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
@@ -27,7 +29,6 @@ export default function HomePage() {
     hasNextPage: false,
     hasPreviousPage: false,
   });
-
   const fetchProducts = async (page: number, categoryId?: string) => {
     try {
       const { products, pagination } = await listAllProducts(page, categoryId);
@@ -59,6 +60,19 @@ export default function HomePage() {
     const categoryId = e.target.value;
     setSelectedCategory(categoryId);
     setPagination((p) => ({ ...p, currentPage: 1 }));
+
+    if (categoryId) {
+      const cat = categories.find((c) => c.id === categoryId);
+      const slug = cat ? renameRoute(cat.name) : "";
+      router.push(`/categoria/${slug}`);
+    } else {
+      router.push(`/`);
+    }
+  };
+
+  const handleCategoryClick = (cat: Category) => {
+    const slug = renameRoute(cat.name);
+    router.push(`/categoria/${slug}`);
   };
 
   return (
@@ -95,7 +109,11 @@ export default function HomePage() {
       <h1>Principais categorias</h1>
       <GridCategory>
         {categories.map((cat) => (
-          <CardCategory key={cat.id}>
+          <CardCategory
+            key={cat.id}
+            onClick={() => handleCategoryClick(cat)}
+            style={{ cursor: "pointer" }}
+          >
             <h3>{cat.name}</h3>
             <p>{cat.productCount} produtos</p>
           </CardCategory>
