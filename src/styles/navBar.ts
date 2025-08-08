@@ -18,6 +18,7 @@ export const Logo = styled.h1`
   font-size: 40px;
   font-weight: bold;
   color: #5d5d6d;
+  cursor: pointer;
 `;
 
 export const SearchContainer = styled.div`

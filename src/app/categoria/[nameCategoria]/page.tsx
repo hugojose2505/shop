@@ -76,6 +76,10 @@ export default function CategoryPage() {
         {products.map((prod) => (
           <ProductCard
             key={prod.id}
+            onClick={() => {
+              const slug = renameRoute(prod.name);
+              router.push(`/produto/${slug}?id=${prod.id}`);
+            }}
             {...prod}
             onAdd={() => console.log(`Produto adicionado: ${prod.name}`)}
           />

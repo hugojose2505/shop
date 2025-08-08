@@ -21,7 +21,7 @@ export function NavBar() {
           justifyContent: "space-between",
         }}
       >
-        <Logo>InsanyShop</Logo>
+        <Logo onClick={() => window.location.href = "/"}>InsanyShop</Logo>
         <SearchContainer>
           <input type="text" placeholder="Procurando por algo específico?" />
           <FiSearch />
