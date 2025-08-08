@@ -4,6 +4,7 @@ import styled from "styled-components";
 export const Card = styled.div`
   width: 356px;
   background: #fff;
+  cursor: pointer;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -88,6 +89,7 @@ export const AddButton = styled.button`
   color: #fff;
   border: none;
   border-radius: 8px;
+  width: 100%;
   padding: 12px;
   font-size: 0.95rem;
   font-weight: 600;

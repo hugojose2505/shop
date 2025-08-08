@@ -20,3 +20,7 @@ export interface ListProductsResponse {
   products: Product[];
   pagination: Pagination;
 }
+
+export interface ProductById {
+  product: Product;
+}

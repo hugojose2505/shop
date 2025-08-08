@@ -94,6 +94,10 @@ export default function HomePage() {
             key={prod.id}
             {...prod}
             onAdd={() => console.log(`Adicionado: ${prod.name}`)}
+            onClick={() => {
+              const slug = renameRoute(prod.name);
+              router.push(`/produto/${slug}?id=${prod.id}`);
+            }}
           />
         ))}
       </Grid>

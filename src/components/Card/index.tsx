@@ -27,15 +27,16 @@ export function ProductCard({
   rating,
   stock,
   onAdd,
-}: Product & { onAdd: () => void }) {
+  onClick,
+}: Product & { onAdd: () => void; onClick?: () => void }) {
   return (
-    <Card>
+    <Card onClick={onClick}>
       <ImageWrapper>
         <Image src={image} alt={name} />
       </ImageWrapper>
       <Content>
         <Header>
-          <Category>{category}</Category>
+          <Category>{category.toUpperCase()}</Category>
           <Rating>
             <FaStar /> {rating.toFixed(1)}
           </Rating>
