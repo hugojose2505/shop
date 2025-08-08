@@ -7,8 +7,10 @@ import {
   Logo,
   SearchContainer,
 } from "@/styles/navBar";
+import { useRouter } from "next/navigation";
 
 export function NavBar() {
+  const router = useRouter();
   return (
     <HeaderWrapper>
       <div
@@ -21,12 +23,14 @@ export function NavBar() {
           justifyContent: "space-between",
         }}
       >
-        <Logo onClick={() => window.location.href = "/"}>InsanyShop</Logo>
+        <Logo onClick={() => router.push("/")}>InsanyShop</Logo>
+
         <SearchContainer>
           <input type="text" placeholder="Procurando por algo específico?" />
           <FiSearch />
         </SearchContainer>
-        <CartContainer>
+
+        <CartContainer onClick={() => router.push("/carrinho")}>
           <FiShoppingBag />
           <CartBadge>2</CartBadge>
         </CartContainer>
