@@ -4,7 +4,6 @@ import styled from "styled-components";
 export const Card = styled.div`
   width: 356px;
   background: #fff;
-  cursor: pointer;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -14,6 +13,7 @@ export const Card = styled.div`
 
 export const ImageWrapper = styled.div`
   width: 356px;
+  cursor: pointer;
   height: 270px;
   background: #f5f5f5;
 `;

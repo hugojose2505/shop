@@ -30,8 +30,8 @@ export function ProductCard({
   onClick,
 }: Product & { onAdd: () => void; onClick?: () => void }) {
   return (
-    <Card onClick={onClick}>
-      <ImageWrapper>
+    <Card >
+      <ImageWrapper  onClick={onClick}>
         <Image src={image} alt={name} />
       </ImageWrapper>
       <Content>

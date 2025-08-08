@@ -1,4 +1,5 @@
 "use client";
+import { useState, useEffect } from "react";
 import { FiSearch, FiShoppingBag } from "react-icons/fi";
 import {
   CartBadge,
@@ -8,9 +9,11 @@ import {
   SearchContainer,
 } from "@/styles/navBar";
 import { useRouter } from "next/navigation";
+import { useCarrinhoStore } from "@/hooks/useCarrinhoStore";
 
 export function NavBar() {
   const router = useRouter();
+  const { cart } = useCarrinhoStore();
   return (
     <HeaderWrapper>
       <div
@@ -32,7 +35,7 @@ export function NavBar() {
 
         <CartContainer onClick={() => router.push("/carrinho")}>
           <FiShoppingBag />
-          <CartBadge>2</CartBadge>
+          <CartBadge>{cart.length}</CartBadge>
         </CartContainer>
       </div>
     </HeaderWrapper>

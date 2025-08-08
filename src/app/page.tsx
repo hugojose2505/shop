@@ -15,13 +15,14 @@ import {
   PageWrapper,
   Select,
 } from "@/styles/listCard";
+import { useCarrinhoStore } from "@/hooks/useCarrinhoStore";
 
 export default function HomePage() {
   const router = useRouter();
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
-
+  const { addToCart } = useCarrinhoStore();
   const [pagination, setPagination] = useState<PagType>({
     currentPage: 1,
     totalPages: 1,
@@ -78,22 +79,37 @@ export default function HomePage() {
   return (
     <PageWrapper>
       <h1>Todos os Produtos</h1>
-
-      <Select value={selectedCategory} onChange={handleCategoryChange}>
-        <option value="">Todas as categorias</option>
-        {categories.map((cat) => (
-          <option key={cat.id} value={cat.id}>
-            {cat.name}
-          </option>
-        ))}
-      </Select>
+      <div
+        style={{
+          justifyContent: "space-between",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <Select value={selectedCategory} onChange={handleCategoryChange}>
+          <option value="">Todas as categorias</option>
+          {categories.map((cat) => (
+            <option key={cat.id} value={cat.id}>
+              {cat.name}
+            </option>
+          ))}
+        </Select>
+        <Select value={selectedCategory} onChange={handleCategoryChange}>
+          <option value="">Organizar por:</option>
+          {categories.map((cat) => (
+            <option key={cat.id} value={cat.id}>
+              {cat.name}
+            </option>
+          ))}
+        </Select>
+      </div>
 
       <Grid>
         {products.map((prod) => (
           <ProductCard
             key={prod.id}
             {...prod}
-            onAdd={() => console.log(`Adicionado: ${prod.name}`)}
+            onAdd={() => addToCart(prod)}
             onClick={() => {
               const slug = renameRoute(prod.name);
               router.push(`/produto/${slug}?id=${prod.id}`);
