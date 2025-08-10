@@ -10,10 +10,11 @@ interface SearchParams {
 export default async function Page({
   searchParams,
 }: {
-  searchParams?: SearchParams;
+  searchParams?: Promise<SearchParams>;
 }) {
-  const search = (searchParams?.search ?? "").trim();
-  const page = Number(searchParams?.page ?? 1);
+  const searchPar = (await searchParams) ?? {};
+  const search = (searchPar.search ?? "").trim();
+  const page = Number(searchPar.page ?? 1);
 
   const res = await listAllProducts(page, undefined, search);
   const products = res.products ?? [];
