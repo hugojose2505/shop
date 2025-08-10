@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Insany Shop",
   description:
-    "An e-commerce platform built with Next.js and styled-components",
+    "Website de e-commerce desenvolvido para teste técnico da Insany",
 };
 
 export default function RootLayout({

@@ -81,7 +81,6 @@ export default function CategoryPage() {
               router.push(`/produto/${slug}?id=${prod.id}`);
             }}
             {...prod}
-            onAdd={() => console.log(`Produto adicionado: ${prod.name}`)}
           />
         ))}
       </Grid>

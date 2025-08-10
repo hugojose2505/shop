@@ -17,21 +17,23 @@ import {
 } from "@/styles/card";
 import { Content } from "@/styles/layout";
 import { Product } from "@/types/product";
+import { useCarrinhoStore } from "@/hooks/useCarrinhoStore";
 
 export function ProductCard({
   category,
+  id,
   image,
   description,
   name,
   price,
   rating,
   stock,
-  onAdd,
   onClick,
-}: Product & { onAdd: () => void; onClick?: () => void }) {
+}: Product & { onClick?: () => void }) {
+  const { addToCart } = useCarrinhoStore();
   return (
-    <Card >
-      <ImageWrapper  onClick={onClick}>
+    <Card>
+      <ImageWrapper onClick={onClick}>
         <Image src={image} alt={name} />
       </ImageWrapper>
       <Content>
@@ -47,7 +49,20 @@ export function ProductCard({
           <Price>{price}</Price>
           <Stock>{stock} em estoque</Stock>
         </Footer>
-        <AddButton onClick={onAdd}>
+        <AddButton
+          onClick={() =>
+            addToCart({
+              name,
+              price,
+              image,
+              id,
+              description,
+              category,
+              rating,
+              stock,
+            })
+          }
+        >
           <FaShoppingCart /> Adicionar
         </AddButton>
       </Content>

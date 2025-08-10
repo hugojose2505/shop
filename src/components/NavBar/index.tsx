@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FiSearch, FiShoppingBag } from "react-icons/fi";
 import {
   CartBadge,
@@ -14,6 +14,14 @@ import { useCarrinhoStore } from "@/hooks/useCarrinhoStore";
 export function NavBar() {
   const router = useRouter();
   const { cart } = useCarrinhoStore();
+  const [search, setSearch] = useState("");
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const q = search.trim();
+    if (!q) return;
+    router.push(`/produto/searchProduct?search=${encodeURIComponent(q)}`);
+  };
+
   return (
     <HeaderWrapper>
       <div
@@ -28,10 +36,26 @@ export function NavBar() {
       >
         <Logo onClick={() => router.push("/")}>InsanyShop</Logo>
 
-        <SearchContainer>
-          <input type="text" placeholder="Procurando por algo específico?" />
-          <FiSearch />
-        </SearchContainer>
+        <form
+          onSubmit={onSubmit}
+          style={{ flex: 1, maxWidth: 520 }}
+        >
+          <SearchContainer>
+            <input
+              type="text"
+              placeholder="Procurando por algo específico?"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <button
+              type="submit"
+              aria-label="Buscar"
+              style={{ all: "unset", cursor: "pointer" }}
+            >
+              <FiSearch />
+            </button>
+          </SearchContainer>
+        </form>
 
         <CartContainer onClick={() => router.push("/carrinho")}>
           <FiShoppingBag />

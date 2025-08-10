@@ -26,7 +26,6 @@ const organizeProducts = [
 
 export default function HomePage() {
   const router = useRouter();
-  const { addToCart } = useCarrinhoStore();
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
@@ -139,7 +138,6 @@ export default function HomePage() {
           <ProductCard
             key={prod.id}
             {...prod}
-            onAdd={() => addToCart(prod)}
             onClick={() =>
               router.push(`/produto/${renameRoute(prod.name)}?id=${prod.id}`)
             }
