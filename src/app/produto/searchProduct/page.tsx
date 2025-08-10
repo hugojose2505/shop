@@ -2,13 +2,18 @@ import { ProductCard } from "@/components/Card";
 import { listAllProducts } from "@/services/Products/listAll";
 import { Grid } from "@/styles/listCard";
 
+interface SearchParams {
+  search?: string;
+  page?: string;
+}
+
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { search?: string; page?: string };
+  searchParams?: SearchParams;
 }) {
-  const search = (searchParams.search ?? "").trim();
-  const page = Number(searchParams.page ?? 1);
+  const search = (searchParams?.search ?? "").trim();
+  const page = Number(searchParams?.page ?? 1);
 
   const res = await listAllProducts(page, undefined, search);
   const products = res.products ?? [];
