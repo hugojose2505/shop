@@ -25,12 +25,7 @@ import { useEffect, useState } from "react";
 import { useCarrinhoStore } from "@/hooks/useCarrinhoStore";
 
 export default function CarrinhoPage() {
-  const {
-    cart,
-    removeFromCart,
-    updateQuantity,
-    clearCart,
-  } = useCarrinhoStore();
+  const { cart, removeFromCart, updateQuantity } = useCarrinhoStore();
 
   const [subtotal, setSubtotal] = useState(0);
   const entrega = 40;
@@ -140,15 +135,14 @@ export default function CarrinhoPage() {
             <CheckoutButton onClick={() => alert("Compra finalizada!")}>
               FINALIZAR A COMPRA
             </CheckoutButton>
-            
-          <Links>
-            <a>AJUDA</a>
-            <a>REEMBOLSOS</a>
-            <a>ENTREGAS E FRETE</a>
-            <a>TROCAS E DEVOLUÇÕES</a>
-          </Links>
-          </SummaryBox>
 
+            <Links>
+              <a>AJUDA</a>
+              <a>REEMBOLSOS</a>
+              <a>ENTREGAS E FRETE</a>
+              <a>TROCAS E DEVOLUÇÕES</a>
+            </Links>
+          </SummaryBox>
         </SummarySection>
       </CarrinhoContainer>
     </PageWrapper>
