@@ -8,7 +8,6 @@ import { Pagination } from "@/components/Pagination";
 import { listAllCategories } from "@/services/Categories/listAllCategories";
 import type { Category } from "@/types/categories";
 import { renameRoute } from "@/utils/renameRoute";
-import { useCarrinhoStore } from "@/hooks/useCarrinhoStore";
 import {
   CardCategory,
   Grid,
