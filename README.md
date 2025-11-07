@@ -11,14 +11,7 @@ Aplicação **InsanyShop**
 
 ---
 
-##  Configuração do Ambiente
 
-Antes de rodar o projeto localmente, crie um arquivo **`.env.local`** na raiz do projeto com o seguinte conteúdo:
-
-```env
-NEXT_PUBLIC_API_URL=https://api.insany.co
-
----
 
 ## 
 
